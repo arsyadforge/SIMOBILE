@@ -5,7 +5,7 @@
         <ion-title>Menu List</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content class="ion-padding no-scroll">
       <ion-list class="animate-fade-in">
         <ion-menu-toggle>
           <ion-item routerLink="/home">
@@ -23,12 +23,25 @@
       </ion-list>
 
       <div class="bottom-spinner-wrapper">
-        <div id="donut-spinner1">
-          <div id="donut-spinner2"></div>
-        </div>
+        <div id="donut-spinner1"></div>
+        <div id="donut-spinner2"></div>
       </div>
     </ion-content>
   </ion-menu>
 
   <ion-router-outlet id="main-content"></ion-router-outlet>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="settings">
+        <ion-icon name="basketball-outline"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-app>
