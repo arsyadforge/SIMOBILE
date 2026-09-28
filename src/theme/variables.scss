@@ -1,2 +1,32 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+//Warna Default(Light Theme)
+:root {
+    /* Warna Aksent / Primary (Light Mode) */
+    --ion-color-primary: #6CABDD;
+    --ion-color-primary-contrast: #ffffff;
+
+    /* Warna Background & Teks (Light Mode) */
+    --ion-background-color: #ffffff;
+    --ion-text-color: #000000;
+
+    /* Optional: Warna background khusus untuk ion-item / ion-card */
+    --ion-item-background: #ffffff;
+    --ion-card-background: #1C2C5B;
+}
+
+//Dark Theme
+body.dark {
+    /* Warna Aksen / Primary (Dark Mode) */
+    --ion-color-primary: #1C2C5B;
+    --ion-color-primary-contrast: #ffffff;
+
+    /* Warna Background & Teks Utama */
+    --ion-background-color: #121212;
+    --ion-text-color: #ffffff;
+
+    /* WAJIB: Warna background khusus ion-item & ion-card */
+    --ion-item-background: #1e1e1e;
+    --ion-card-background: #6CABDD;
+}
