@@ -1,0 +1,16 @@
+ion-card {
+  margin: 8px;
+  overflow: hidden;
+}
+
+ion-img {
+  width: 100%;
+  height: 150px;
+}
+
+ion-img::part(image) {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+}
