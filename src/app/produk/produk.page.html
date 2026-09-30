@@ -1,13 +1,41 @@
 <ion-header [translucent]="true">
+
   <ion-toolbar>
-    <ion-title>produk</ion-title>
+    <ion-title>Produk</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">produk</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <ion-grid>
+
+    <!-- Mengulang setiap baris produk -->
+    <ion-row *ngFor="let row of productRows">
+
+      <!-- Mengulang produk dalam setiap baris -->
+      <ion-col size="4" *ngFor="let product of row">
+
+        <!-- Card produk bisa diklik untuk membuka detail -->
+        <ion-card [routerLink]="['detail', product.id]">
+
+          <!-- Menampilkan gambar produk -->
+          <ion-img [src]="product.gambar"></ion-img>
+
+          <!-- Menampilkan nama produk -->
+          <ion-card-header>
+            <ion-card-title>
+              {{ product.nama }}
+            </ion-card-title>
+          </ion-card-header>
+
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
 </ion-content>
