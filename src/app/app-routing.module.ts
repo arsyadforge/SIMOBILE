@@ -26,7 +26,27 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },  {
+    path: 'produk',
+    loadChildren: () => import('./produk/produk.module').then( m => m.ProdukPageModule)
   },
+  {
+    path: 'transaksi',
+    loadChildren: () => import('./transaksi/transaksi.module').then( m => m.TransaksiPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+  },
+  {
+    path: 'logout',
+    loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
+  },
+
 
 ];
 
