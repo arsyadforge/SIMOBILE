@@ -1,7 +1,17 @@
 <ion-header [translucent]="true">
 
   <ion-toolbar>
+
     <ion-title>Produk</ion-title>
+
+    <ion-buttons slot="end">
+
+      <ion-button [routerLink]="['form']">
+        TAMBAH PRODUK
+      </ion-button>
+
+    </ion-buttons>
+
   </ion-toolbar>
 
 </ion-header>
@@ -11,24 +21,38 @@
 
   <ion-grid>
 
-    <!-- Mengulang setiap baris produk -->
     <ion-row *ngFor="let row of productRows">
 
-      <!-- Mengulang produk dalam setiap baris -->
       <ion-col size="4" *ngFor="let product of row">
 
-        <!-- Card produk bisa diklik untuk membuka detail -->
-        <ion-card [routerLink]="['detail', product.id]">
+        <ion-card>
 
-          <!-- Menampilkan gambar produk -->
-          <ion-img [src]="product.gambar"></ion-img>
+          <!-- Gambar dan nama menuju detail -->
+          <div [routerLink]="['detail', product.id]">
 
-          <!-- Menampilkan nama produk -->
-          <ion-card-header>
-            <ion-card-title>
-              {{ product.nama }}
-            </ion-card-title>
-          </ion-card-header>
+            <ion-img
+              [src]="product.gambar">
+            </ion-img>
+
+            <ion-card-header>
+
+              <ion-card-title>
+                {{ product.nama }}
+              </ion-card-title>
+
+            </ion-card-header>
+
+          </div>
+
+
+          <!-- Tombol edit -->
+          <ion-button
+            expand="block"
+            [routerLink]="['form', product.id]">
+
+            EDIT
+
+          </ion-button>
 
         </ion-card>
 
