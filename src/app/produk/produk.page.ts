@@ -49,6 +49,20 @@ export class ProdukPage implements OnInit {
       stok: 10,
       harga: 12000,
       gambar: 'assets/img/kopi.jpg'
+    },
+    {
+      id: 7,
+      nama: 'Tepung',
+      stok: 0,
+      harga: 0,
+      gambar: 'assets/img/def.jpg'
+    },
+    {
+      id: 8,
+      nama: 'Jajan',
+      stok: 0,
+      harga: 0,
+      gambar: 'assets/img/def.jpg'
     }
   ];
 
