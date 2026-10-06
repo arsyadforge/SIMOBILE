@@ -8,30 +8,16 @@ import { ProdukData } from '../services/produk-data';
   standalone: false,
 })
 export class ProdukPage implements OnInit {
-
   products: any[] = [];
   productRows: any[][] = [];
 
-  kataCari: string = '';
+  searchTerm: string = '';
 
   constructor(private produkData: ProdukData) {}
 
   ngOnInit() {
     this.products = this.produkData.getSemuaProduk();
     this.productRows = this.chunkArray(this.products, 3);
-  }
-
-  cari() {
-    const kata = this.kataCari.toLowerCase().trim();
-    const hasil: any[] = [];
-
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].nama.toLowerCase().includes(kata)) {
-        hasil.push(this.products[i]);
-      }
-    }
-
-    this.productRows = this.chunkArray(hasil, 3);
   }
 
   chunkArray(arr: any[], chunkSize: number): any[][] {
@@ -44,4 +30,13 @@ export class ProdukPage implements OnInit {
     return result;
   }
 
+  filterProducts() {
+    const keyword = this.searchTerm.toLowerCase().trim();
+
+    const filtered = this.products.filter(product =>
+      product.nama.toLowerCase().includes(keyword)
+    );
+
+    this.productRows = this.chunkArray(filtered, 3);
+  }
 }
