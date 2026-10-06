@@ -69,7 +69,10 @@ export class ProdukPage implements OnInit {
 
   productRows: any[][] = [];
 
-  constructor() {}
+  //Search Produk
+  searchTerm: string = '';
+
+  constructor() { }
 
   ngOnInit() {
     this.productRows = this.chunkArray(this.products, 3);
@@ -84,6 +87,18 @@ export class ProdukPage implements OnInit {
     }
 
     return result;
+  }
+
+  //Filter Pencarian Produk
+  filterProducts() {
+    const keyword = this.searchTerm.toLowerCase().trim();
+
+    const filtered = this.products.filter(product =>
+      product.nama.toLowerCase().includes(keyword)
+    );
+
+    // Memecah hasil filter ke dalam baris grid
+    this.productRows = this.chunkArray(filtered, 3);
   }
 
 }
