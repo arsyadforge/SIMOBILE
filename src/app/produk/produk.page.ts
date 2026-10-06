@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class ProdukPage implements OnInit {
+
   products = [
     {
       id: 1,
@@ -49,11 +50,26 @@ export class ProdukPage implements OnInit {
       stok: 10,
       harga: 12000,
       gambar: 'assets/img/kopi.jpg'
+    },
+    {
+      id: 7,
+      nama: 'Tepung',
+      stok: 0,
+      harga: 0,
+      gambar: 'assets/img/def.jpg'
+    },
+    {
+      id: 8,
+      nama: 'Jajan',
+      stok: 0,
+      harga: 0,
+      gambar: 'assets/img/def.jpg'
     }
   ];
 
   productRows: any[][] = [];
-  constructor() { }
+
+  constructor() {}
 
   ngOnInit() {
     this.productRows = this.chunkArray(this.products, 3);
@@ -64,11 +80,10 @@ export class ProdukPage implements OnInit {
     const result = [];
 
     for (let i = 0; i < arr.length; i += chunkSize) {
-
       result.push(arr.slice(i, i + chunkSize));
-
     }
 
     return result;
   }
+
 }

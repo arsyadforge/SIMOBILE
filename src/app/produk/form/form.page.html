@@ -1,0 +1,174 @@
+<ion-header [translucent]="true">
+
+  <ion-toolbar>
+
+    <ion-title>
+
+      {{ isEdit ? 'Edit Produk' : 'Tambah Produk' }}
+
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <form
+    [formGroup]="produkForm"
+    (ngSubmit)="submitProduk()">
+
+
+    <ion-list>
+
+      <ion-item>
+
+        <ion-input
+
+          label="Nama Produk"
+
+          labelPlacement="stacked"
+
+          type="text"
+
+          formControlName="nama"
+
+          placeholder="Masukkan nama produk">
+
+        </ion-input>
+
+      </ion-item>
+
+
+      <ion-text
+        color="danger"
+        *ngIf="
+          produkForm.get('nama')?.touched &&
+          produkForm.get('nama')?.invalid
+        ">
+
+        <p>
+          Nama produk wajib diisi.
+        </p>
+
+      </ion-text>
+
+      <ion-item>
+
+        <ion-input
+
+          label="Harga"
+
+          labelPlacement="stacked"
+
+          type="number"
+
+          formControlName="harga"
+
+          placeholder="Masukkan harga">
+
+        </ion-input>
+
+      </ion-item>
+
+
+      <ion-text
+        color="danger"
+        *ngIf="
+          produkForm.get('harga')?.touched &&
+          produkForm.get('harga')?.invalid
+        ">
+
+
+        <p
+          *ngIf="
+            produkForm.get('harga')?.errors?.['required']
+          ">
+
+          Harga wajib diisi.
+
+        </p>
+
+
+        <p
+          *ngIf="
+            produkForm.get('harga')?.errors?.['min']
+          ">
+
+          Harga harus lebih dari 0.
+
+        </p>
+
+
+      </ion-text>
+
+      <ion-item>
+
+        <ion-input
+
+          label="Stok"
+
+          labelPlacement="stacked"
+
+          type="number"
+
+          formControlName="stok"
+
+          placeholder="Masukkan stok">
+
+        </ion-input>
+
+      </ion-item>
+
+
+      <ion-text
+        color="danger"
+        *ngIf="
+          produkForm.get('stok')?.touched &&
+          produkForm.get('stok')?.invalid
+        ">
+
+
+        <p
+          *ngIf="
+            produkForm.get('stok')?.errors?.['required']
+          ">
+
+          Stok wajib diisi.
+
+        </p>
+
+
+        <p
+          *ngIf="
+            produkForm.get('stok')?.errors?.['min']
+          ">
+
+          Stok tidak boleh negatif.
+
+        </p>
+
+
+      </ion-text>
+
+
+
+    </ion-list>
+
+    <ion-button
+
+      expand="block"
+
+      type="submit"
+
+      [disabled]="produkForm.invalid">
+
+      {{ isEdit ? 'UPDATE' : 'SIMPAN' }}
+
+    </ion-button>
+
+
+  </form>
+
+</ion-content>

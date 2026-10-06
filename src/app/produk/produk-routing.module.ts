@@ -1,28 +1,56 @@
-// Mengimpor NgModule untuk membuat module Angular
 import { NgModule } from '@angular/core';
 
-// Mengimpor Routes untuk membuat daftar route dan RouterModule untuk menjalankan sistem routing
-import { Routes, RouterModule } from '@angular/router';
+import {
+  Routes,
+  RouterModule
+} from '@angular/router';
 
-// Mengimpor ProdukPage sebagai halaman utama produk
 import { ProdukPage } from './produk.page';
 
+
 const routes: Routes = [
+
   {
     path: '',
     component: ProdukPage
   },
+
   {
     path: 'detail/:id',
     loadChildren: () =>
       import('./detail/detail.module').then(
         m => m.DetailPageModule
       )
+  },
+
+  {
+    path: 'form',
+    loadChildren: () =>
+      import('./form/form.module').then(
+        m => m.FormPageModule
+      )
+  },
+
+  {
+    path: 'form/:id',
+    loadChildren: () =>
+      import('./form/form.module').then(
+        m => m.FormPageModule
+      )
   }
+
 ];
 
+
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+
+  exports: [
+    RouterModule
+  ]
+
 })
 export class ProdukPageRoutingModule {}

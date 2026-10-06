@@ -14,6 +14,7 @@ export class DetailPage implements OnInit {
   stok: number = 0;
   hargaBeli: number = 0;
   hargaJual: number = 0;
+  gambar: string = 'assets/Gambar/Default.jpg';
 
   constructor(private route: ActivatedRoute) { }
 
@@ -57,6 +58,20 @@ export class DetailPage implements OnInit {
         this.stok = 10;
         this.hargaBeli = 12000;
         this.hargaJual = 15000;
+      }
+
+      if (this.id == '7') {
+        this.stok = 0;
+        this.hargaBeli = 0;
+        this.hargaJual = 0;
+        this.gambar = 'assets/img/default.jpg';
+      }
+
+      if (this.id == '8') {
+        this.stok = 0;
+        this.hargaBeli = 0;
+        this.hargaJual = 0;
+        this.gambar = 'assets/img/default.jpg';
       }
 
     });
