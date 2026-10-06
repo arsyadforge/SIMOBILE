@@ -18,7 +18,16 @@
 
 
 <ion-content [fullscreen]="true">
-
+  <ion-item>
+  <ion-input
+    type="search"
+    label="Cari produk"
+    labelPlacement="floating"
+    placeholder="Ketik nama produk"
+    [(ngModel)]="kataCari"
+    (ionInput)="cari()">
+  </ion-input>
+</ion-item>
   <ion-grid>
 
     <ion-row *ngFor="let row of productRows">
@@ -61,5 +70,8 @@
     </ion-row>
 
   </ion-grid>
+  <ion-item *ngIf="productRows.length == 0">
+  <ion-label>Produk tidak ditemukan</ion-label>
+</ion-item>
 
 </ion-content>

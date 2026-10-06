@@ -69,6 +69,21 @@ export class ProdukPage implements OnInit {
 
   productRows: any[][] = [];
 
+    kataCari: string = '';
+
+  cari() {
+    const kata = this.kataCari.toLowerCase().trim();
+    const hasil: any[] = [];
+
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].nama.toLowerCase().includes(kata)) {
+        hasil.push(this.products[i]);
+      }
+    }
+
+    this.productRows = this.chunkArray(hasil, 3);
+  }
+
   constructor() {}
 
   ngOnInit() {
