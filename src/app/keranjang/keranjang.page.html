@@ -1,13 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>keranjang</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Keranjang Belanja</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">keranjang</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- Pesan jika keranjang kosong -->
+  <div *ngIf="items.length === 0" class="ion-text-center ion-padding">
+    <p>Keranjang Anda kosong.</p>
+  </div>
+
+  <!-- Daftar item di keranjang -->
+  <ion-list *ngIf="items.length > 0">
+    <ion-item *ngFor="let item of items">
+      <ion-label>
+        <h2>{{ item.nama }}</h2>
+        <p>{{ item.jumlah }}x - Rp {{ item.harga }}</p>
+      </ion-label>
+      <ion-note slot="end" color="primary">
+        Rp {{ item.harga * item.jumlah }}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+  <!-- Total & tombol Checkout -->
+  <div class="ion-padding" *ngIf="items.length > 0">
+    <h3 class="ion-text-end">Total: Rp {{ totalHarga }}</h3>
+    <ion-button expand="block" color="success" (click)="prosesCheckout()">
+      Checkout Pesanan
+    </ion-button>
+  </div>
 </ion-content>

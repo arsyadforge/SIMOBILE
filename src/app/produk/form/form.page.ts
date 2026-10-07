@@ -22,13 +22,17 @@ import {
 
 export class FormPage implements OnInit {
 
+  // Form untuk input data produk
   produkForm!: FormGroup;
 
+  // Menyimpan ID produk ketika edit
   id: number | null = null;
 
+  // Menentukan apakah sedang edit atau tambah
   isEdit: boolean = false;
 
 
+  // Data awal produk
   products = [
 
     {
@@ -36,6 +40,7 @@ export class FormPage implements OnInit {
       nama: 'Beras',
       stok: 10,
       harga: 20000,
+      hargaJual: 25000,
       gambar: 'assets/img/beras.jpg'
     },
 
@@ -44,6 +49,7 @@ export class FormPage implements OnInit {
       nama: 'Minyak',
       stok: 15,
       harga: 18000,
+      hargaJual: 23000,
       gambar: 'assets/img/minyak.jpg'
     },
 
@@ -52,6 +58,7 @@ export class FormPage implements OnInit {
       nama: 'Gula',
       stok: 20,
       harga: 17000,
+      hargaJual: 22000,
       gambar: 'assets/img/gula.jpg'
     },
 
@@ -60,6 +67,7 @@ export class FormPage implements OnInit {
       nama: 'Mie',
       stok: 30,
       harga: 3500,
+      hargaJual: 5500,
       gambar: 'assets/img/mie.jpg'
     },
 
@@ -68,6 +76,7 @@ export class FormPage implements OnInit {
       nama: 'Teh',
       stok: 12,
       harga: 8000,
+      hargaJual: 10000,
       gambar: 'assets/img/teh.jpg'
     },
 
@@ -76,6 +85,7 @@ export class FormPage implements OnInit {
       nama: 'Kopi',
       stok: 10,
       harga: 12000,
+      hargaJual: 15000,
       gambar: 'assets/img/kopi.jpg'
     },
 
@@ -84,6 +94,7 @@ export class FormPage implements OnInit {
       nama: 'Tepung',
       stok: 0,
       harga: 0,
+      hargaJual: 0,
       gambar: 'assets/img/def.jpg'
     },
 
@@ -92,6 +103,7 @@ export class FormPage implements OnInit {
       nama: 'Jajan',
       stok: 0,
       harga: 0,
+      hargaJual: 0,
       gambar: 'assets/img/def.jpg'
     }
 
@@ -107,13 +119,27 @@ export class FormPage implements OnInit {
 
   ngOnInit() {
 
+    // Mengambil data produk yang sudah tersimpan
+    const savedProducts = localStorage.getItem('products');
+
+    // Jika sudah ada data tersimpan,
+    // gunakan data tersebut
+    if (savedProducts) {
+
+      this.products = JSON.parse(savedProducts);
+
+    }
+
+    // Membuat form
     this.produkForm = this.formBuilder.group({
 
+      // Nama produk
       nama: [
         '',
         Validators.required
       ],
 
+      // Harga beli
       harga: [
         0,
         [
@@ -122,6 +148,16 @@ export class FormPage implements OnInit {
         ]
       ],
 
+      // Harga jual
+      hargaJual: [
+        0,
+        [
+          Validators.required,
+          Validators.min(1)
+        ]
+      ],
+
+      // Stok
       stok: [
         0,
         [
@@ -130,6 +166,7 @@ export class FormPage implements OnInit {
         ]
       ],
 
+      // Gambar
       gambar: [
         'assets/img/def.jpg'
       ]
@@ -137,20 +174,26 @@ export class FormPage implements OnInit {
     });
 
 
+    // Mengecek apakah URL mempunyai ID
     this.route.params.subscribe(params => {
 
       if (params['id']) {
 
+        // Mengambil ID dari URL
         this.id = Number(params['id']);
 
+        // Mengaktifkan mode edit
         this.isEdit = true;
 
 
+        // Mencari produk berdasarkan ID
         const product = this.products.find(
           p => p.id === this.id
         );
 
 
+        // Jika produk ditemukan,
+        // masukkan datanya ke form
         if (product) {
 
           this.produkForm.patchValue({
@@ -158,6 +201,8 @@ export class FormPage implements OnInit {
             nama: product.nama,
 
             harga: product.harga,
+
+            hargaJual: product.hargaJual,
 
             stok: product.stok,
 
@@ -176,6 +221,7 @@ export class FormPage implements OnInit {
 
   submitProduk() {
 
+    // Mengecek validasi form
     if (this.produkForm.invalid) {
 
       this.produkForm.markAllAsTouched();
@@ -185,36 +231,118 @@ export class FormPage implements OnInit {
     }
 
 
-    if (this.isEdit) {
+    // Mengambil data dari form
+    const formData = this.produkForm.value;
 
-      console.log('Produk berhasil diedit!');
 
-      console.log('ID Produk:', this.id);
+    // ============================
+    // MODE EDIT
+    // ============================
 
-      console.log(
-        'Data Produk:',
-        this.produkForm.value
+    if (this.isEdit && this.id !== null) {
+
+      // Mencari index produk
+      const index = this.products.findIndex(
+        p => p.id === this.id
       );
 
-      alert('Produk berhasil diedit!');
+
+      // Jika produk ditemukan
+      if (index !== -1) {
+
+        // Mengubah data produk
+        this.products[index] = {
+
+          id: this.id,
+
+          nama: formData.nama,
+
+          harga: formData.harga,
+
+          hargaJual: formData.hargaJual,
+
+          stok: formData.stok,
+
+          gambar: this.products[index].gambar
+
+        };
+
+
+        // Menyimpan data terbaru
+        localStorage.setItem(
+          'products',
+          JSON.stringify(this.products)
+        );
+
+
+        console.log(
+          'Produk berhasil diedit!',
+          this.products[index]
+        );
+
+
+        alert('Produk berhasil diedit!');
+
+      }
 
     }
 
+
+    // ============================
+    // MODE TAMBAH
+    // ============================
+
     else {
 
-      console.log('Produk berhasil ditambahkan!');
+      // Membuat ID baru
+      const newId =
+        this.products.length > 0
+          ? Math.max(...this.products.map(p => p.id)) + 1
+          : 1;
+
+
+      // Membuat produk baru
+      const newProduct = {
+
+        id: newId,
+
+        nama: formData.nama,
+
+        harga: formData.harga,
+
+        hargaJual: formData.hargaJual,
+
+        stok: formData.stok,
+
+        gambar: formData.gambar
+
+      };
+
+
+      // Menambahkan produk ke array
+      this.products.push(newProduct);
+
+
+      // Menyimpan produk ke localStorage
+      localStorage.setItem(
+        'products',
+        JSON.stringify(this.products)
+      );
+
 
       console.log(
-        'Data Produk:',
-        this.produkForm.value
+        'Produk berhasil ditambahkan!',
+        newProduct
       );
+
 
       alert('Produk berhasil ditambahkan!');
 
     }
 
 
-    this.router.navigate(['/produk']);
+    // Kembali ke halaman Produk
+    this.router.navigate(['/tabs/produk']);
 
   }
 

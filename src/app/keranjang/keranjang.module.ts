@@ -15,6 +15,8 @@ import { KeranjangPage } from './keranjang.page';
     IonicModule,
     KeranjangPageRoutingModule
   ],
-  declarations: [KeranjangPage]
+  declarations: [
+    KeranjangPage
+  ]
 })
 export class KeranjangPageModule {}
