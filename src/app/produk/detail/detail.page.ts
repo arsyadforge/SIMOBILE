@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+
+import {
+  ActivatedRoute
+} from '@angular/router';
+
 
 @Component({
   selector: 'app-detail',
@@ -7,71 +11,77 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./detail.page.scss'],
   standalone: false,
 })
+
+
 export class DetailPage implements OnInit {
 
+  // ID produk dari URL
   id: string = '';
 
-  stok: number = 0;
-  hargaBeli: number = 0;
-  hargaJual: number = 0;
-  gambar: string = 'assets/Gambar/Default.jpg';
+  // Data produk
+  nama: string = '';
 
-  constructor(private route: ActivatedRoute) { }
+  stok: number = 0;
+
+  hargaBeli: number = 0;
+
+  hargaJual: number = 0;
+
+  gambar: string = 'assets/img/def.jpg';
+
+
+  constructor(
+    private route: ActivatedRoute
+  ) {}
+
 
   ngOnInit() {
 
+    // Mengambil ID dari URL
     this.route.params.subscribe(params => {
 
       this.id = params['id'];
 
-      if (this.id == '1') {
-        this.stok = 10;
-        this.hargaBeli = 20000;
-        this.hargaJual = 25000;
-      }
 
-      if (this.id == '2') {
-        this.stok = 15;
-        this.hargaBeli = 30000;
-        this.hargaJual = 35000;
-      }
+      // Mengambil data produk dari localStorage
+      const savedProducts =
+        localStorage.getItem('products');
 
-      if (this.id == '3') {
-        this.stok = 20;
-        this.hargaBeli = 40000;
-        this.hargaJual = 45000;
-      }
 
-      if (this.id == '4') {
-        this.stok = 30;
-        this.hargaBeli = 3000;
-        this.hargaJual = 3500;
-      }
+      // Jika data tersedia
+      if (savedProducts) {
 
-      if (this.id == '5') {
-        this.stok = 12;
-        this.hargaBeli = 8000;
-        this.hargaJual = 10000;
-      }
+        const products =
+          JSON.parse(savedProducts);
 
-      if (this.id == '6') {
-        this.stok = 10;
-        this.hargaBeli = 12000;
-        this.hargaJual = 15000;
-      }
 
-      if (this.id == '7') {
-        this.stok = 0;
-        this.hargaBeli = 0;
-        this.hargaJual = 0;
-        this.gambar = 'assets/img/default.jpg';
-      }
+        // Mencari produk berdasarkan ID
+        const product = products.find(
+          (p: any) =>
+            p.id === Number(this.id)
+        );
 
-      if (this.id == '8') {
-        this.stok = 0;
-        this.hargaBeli = 0;
-        this.hargaJual = 0;
-        this.gambar = 'assets/img/default.jpg';
+
+        // Jika produk ditemukan
+        if (product) {
+
+          // Menampilkan nama produk
+          this.nama = product.nama;
+
+          // Menampilkan stok
+          this.stok = product.stok;
+
+          // Menampilkan harga beli
+          this.hargaBeli = product.harga;
+
+          // Menampilkan harga jual
+          this.hargaJual = product.hargaJual;
+
+          // Menampilkan gambar
+          this.gambar = product.gambar;
+
+        }
+
       }
 
     });

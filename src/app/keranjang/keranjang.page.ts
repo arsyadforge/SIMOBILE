@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-keranjang',
@@ -6,11 +6,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./keranjang.page.scss'],
   standalone: false,
 })
-export class KeranjangPage implements OnInit {
+export class KeranjangPage {
 
-  constructor() { }
+  // Menyimpan data produk dalam keranjang
+  keranjang: any[] = [];
 
-  ngOnInit() {
+  constructor() {}
+
+
+  // Dipanggil ketika halaman keranjang dibuka
+  ionViewWillEnter() {
+
+    const data = localStorage.getItem('keranjang');
+
+    if (data) {
+
+      this.keranjang = JSON.parse(data);
+
+    } else {
+
+      this.keranjang = [];
+
+    }
+
   }
 
 }

@@ -1,16 +1,182 @@
+/* ============================= */
+/* GRID PRODUK */
+/* ============================= */
+
+ion-grid {
+  padding: 10px;
+}
+
+ion-row {
+  align-items: stretch;
+}
+
+ion-col {
+  display: flex;
+}
+
+
+/* ============================= */
+/* CARD PRODUK */
+/* ============================= */
+
 ion-card {
+  width: 100%;
   margin: 8px;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 480px;
+
+  border-radius: 6px;
+
   overflow: hidden;
 }
 
-ion-img {
-  width: 100%;
-  height: 150px;
+
+/* ============================= */
+/* GAMBAR PRODUK */
+/* ============================= */
+
+ion-card > div:first-child {
+  cursor: pointer;
 }
 
-ion-img::part(image) {
+
+/* Membuat semua gambar memiliki tinggi yang sama */
+ion-img {
   width: 100%;
-  height: 150px;
+  height: 220px;
+
   object-fit: cover;
-  object-position: center;
+}
+
+
+/* ============================= */
+/* NAMA PRODUK */
+/* ============================= */
+
+ion-card-header {
+  background: #203568;
+
+  padding: 15px;
+
+  min-height: 70px;
+
+  display: flex;
+  align-items: center;
+}
+
+ion-card-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+
+/* ============================= */
+/* TOMBOL EDIT */
+/* ============================= */
+
+ion-card > ion-button {
+  margin: 0 5px 5px 5px;
+
+  --border-radius: 5px;
+
+  height: 50px;
+}
+
+
+/* ============================= */
+/* JUMLAH PRODUK */
+/* ============================= */
+
+.jumlah-container {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 25px;
+
+  height: 60px;
+
+  margin: 0;
+}
+
+
+/* Angka jumlah */
+
+.jumlah-container ion-label {
+  font-size: 24px;
+
+  font-weight: bold;
+
+  min-width: 35px;
+
+  text-align: center;
+}
+
+
+/* Tombol + dan - */
+
+.jumlah-container ion-button {
+  width: 50px;
+  height: 45px;
+
+  margin: 0;
+
+  --border-radius: 5px;
+}
+
+
+/* ============================= */
+/* TOMBOL SIMPAN KERANJANG */
+/* ============================= */
+
+ion-card > ion-button:last-child {
+  margin-top: auto;
+
+  margin-bottom: 5px;
+
+  height: 52px;
+
+  --border-radius: 5px;
+
+  font-size: 17px;
+}
+
+
+/* ============================= */
+/* PRODUK TIDAK DITEMUKAN */
+/* ============================= */
+
+ion-item {
+  margin: 20px;
+}
+
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+/* Tampilan layar lebih kecil */
+
+@media (max-width: 768px) {
+
+  ion-card {
+    min-height: 430px;
+  }
+
+  ion-img {
+    height: 180px;
+  }
+
+  ion-card-title {
+    font-size: 20px;
+  }
+
+  .jumlah-container {
+    gap: 15px;
+  }
+
 }

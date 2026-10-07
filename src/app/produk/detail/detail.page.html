@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
 
   <ion-toolbar>
 
@@ -6,33 +6,49 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Detail Produk</ion-title>
+    <ion-title>
+      Detail Produk
+    </ion-title>
 
   </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
   <ion-card>
 
     <ion-card-header>
 
-      <ion-card-title>Detail Produk</ion-card-title>
+      <ion-card-title color="secondary">
+        Detail Produk
+      </ion-card-title>
 
     </ion-card-header>
 
 
     <ion-card-content>
 
-      <p>ID Produk: {{ id }}</p>
+      <p>
+        Nama Produk: {{ nama }}
+      </p>
 
-      <p>Stok: {{ stok }}</p>
+      <p>
+        ID Produk: {{ id }}
+      </p>
 
-      <p>Harga Beli: Rp {{ hargaBeli }}</p>
+      <p>
+        Stok: {{ stok }}
+      </p>
 
-      <p>Harga Jual: Rp {{ hargaJual }}</p>
+      <p>
+        Harga Beli: Rp {{ hargaBeli }}
+      </p>
+
+      <p>
+        Harga Jual: Rp {{ hargaJual }}
+      </p>
 
     </ion-card-content>
 

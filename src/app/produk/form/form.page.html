@@ -2,10 +2,15 @@
 
   <ion-toolbar>
 
+
+    <!-- Tombol kembali ke halaman sebelumnya -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/produk"></ion-back-button>
+    </ion-buttons>
+
+    <!-- Judul halaman -->
     <ion-title>
-
       {{ isEdit ? 'Edit Produk' : 'Tambah Produk' }}
-
     </ion-title>
 
   </ion-toolbar>
@@ -15,35 +20,27 @@
 
 <ion-content [fullscreen]="true">
 
-  <form
-    [formGroup]="produkForm"
-    (ngSubmit)="submitProduk()">
-
+  <!-- Form produk -->
+  <form [formGroup]="produkForm" (ngSubmit)="submitProduk()">
 
     <ion-list>
 
+
+      <!-- ========================= -->
+      <!-- NAMA PRODUK -->
+      <!-- ========================= -->
+
       <ion-item>
 
-        <ion-input
-
-          label="Nama Produk"
-
-          labelPlacement="stacked"
-
-          type="text"
-
-          formControlName="nama"
-
+        <ion-input label="Nama Produk" labelPlacement="stacked" type="text" formControlName="nama"
           placeholder="Masukkan nama produk">
-
         </ion-input>
 
       </ion-item>
 
 
-      <ion-text
-        color="danger"
-        *ngIf="
+      <!-- Validasi nama -->
+      <ion-text color="danger" *ngIf="
           produkForm.get('nama')?.touched &&
           produkForm.get('nama')?.invalid
         ">
@@ -54,84 +51,108 @@
 
       </ion-text>
 
+
+
+      <!-- ========================= -->
+      <!-- HARGA BELI -->
+      <!-- ========================= -->
+
       <ion-item>
 
-        <ion-input
-
-          label="Harga"
-
-          labelPlacement="stacked"
-
-          type="number"
-
-          formControlName="harga"
-
-          placeholder="Masukkan harga">
-
+        <ion-input label="Harga Beli" labelPlacement="stacked" type="number" formControlName="harga" step="1000"
+          placeholder="Masukkan harga beli">
         </ion-input>
 
       </ion-item>
 
 
-      <ion-text
-        color="danger"
-        *ngIf="
+      <!-- Validasi harga beli -->
+      <ion-text color="danger" *ngIf="
           produkForm.get('harga')?.touched &&
           produkForm.get('harga')?.invalid
         ">
 
-
-        <p
-          *ngIf="
+        <p *ngIf="
             produkForm.get('harga')?.errors?.['required']
           ">
 
-          Harga wajib diisi.
+          Harga beli wajib diisi.
 
         </p>
 
 
-        <p
-          *ngIf="
+        <p *ngIf="
             produkForm.get('harga')?.errors?.['min']
           ">
 
-          Harga harus lebih dari 0.
+          Harga beli harus lebih dari 0.
 
         </p>
 
-
       </ion-text>
+
+
+
+      <!-- ========================= -->
+      <!-- HARGA JUAL -->
+      <!-- ========================= -->
 
       <ion-item>
 
-        <ion-input
-
-          label="Stok"
-
-          labelPlacement="stacked"
-
-          type="number"
-
-          formControlName="stok"
-
-          placeholder="Masukkan stok">
-
+        <ion-input label="Harga Jual" labelPlacement="stacked" type="number" formControlName="hargaJual" step="1000"
+          placeholder="Masukkan harga jual">
         </ion-input>
 
       </ion-item>
 
 
-      <ion-text
-        color="danger"
-        *ngIf="
+      <!-- Validasi harga jual -->
+      <ion-text color="danger" *ngIf="
+          produkForm.get('hargaJual')?.touched &&
+          produkForm.get('hargaJual')?.invalid
+        ">
+
+        <p *ngIf="
+            produkForm.get('hargaJual')?.errors?.['required']
+          ">
+
+          Harga jual wajib diisi.
+
+        </p>
+
+
+        <p *ngIf="
+            produkForm.get('hargaJual')?.errors?.['min']
+          ">
+
+          Harga jual harus lebih dari 0.
+
+        </p>
+
+      </ion-text>
+
+
+
+      <!-- ========================= -->
+      <!-- STOK -->
+      <!-- ========================= -->
+
+      <ion-item>
+
+        <ion-input label="Stok" labelPlacement="stacked" type="number" formControlName="stok" step="1"
+          placeholder="Masukkan stok">
+        </ion-input>
+
+      </ion-item>
+
+
+      <!-- Validasi stok -->
+      <ion-text color="danger" *ngIf="
           produkForm.get('stok')?.touched &&
           produkForm.get('stok')?.invalid
         ">
 
-
-        <p
-          *ngIf="
+        <p *ngIf="
             produkForm.get('stok')?.errors?.['required']
           ">
 
@@ -140,8 +161,7 @@
         </p>
 
 
-        <p
-          *ngIf="
+        <p *ngIf="
             produkForm.get('stok')?.errors?.['min']
           ">
 
@@ -149,20 +169,18 @@
 
         </p>
 
-
       </ion-text>
-
 
 
     </ion-list>
 
-    <ion-button
 
-      expand="block"
 
-      type="submit"
+    <!-- ========================= -->
+    <!-- TOMBOL SIMPAN / UPDATE -->
+    <!-- ========================= -->
 
-      [disabled]="produkForm.invalid">
+    <ion-button expand="block" type="submit" [disabled]="produkForm.invalid">
 
       {{ isEdit ? 'UPDATE' : 'SIMPAN' }}
 
