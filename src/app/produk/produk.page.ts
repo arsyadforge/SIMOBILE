@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KeranjangPage } from '../keranjang/keranjang.page';
 
 @Component({
   selector: 'app-produk',
@@ -100,8 +101,7 @@ export class ProdukPage implements OnInit {
 
   ngOnInit() {
 
-    // Mengambil data produk terbaru
-    // dari localStorage jika tersedia
+    // Mengambil data produk terbaru dari localStorage jika tersedia
     const savedProducts =
       localStorage.getItem('products');
 
@@ -125,6 +125,12 @@ export class ProdukPage implements OnInit {
     this.productRows =
       this.chunkArray(this.products, 3);
 
+  }
+
+
+  // Muat ulang data setiap halaman Produk dibuka,supaya perubahan dari halaman Edit/Tambah Produk ikut terbaca
+  ionViewWillEnter() {
+    this.ngOnInit();
   }
 
 
@@ -190,80 +196,25 @@ export class ProdukPage implements OnInit {
 
     }
 
+    // Kirim produk ke halaman keranjang
+    KeranjangPage.tambahProduk({
+      id: product.id,
+      nama: product.nama,
+      jumlah: product.jumlah,
+      harga: product.hargaJual   
+    });
 
-    // Mengambil data keranjang yang sudah ada
-    const savedCart =
-      localStorage.getItem('keranjang');
+    // Kurangi stok sesuai jumlah yang dimasukkan ke keranjang
+    product.stok -= product.jumlah;
 
-
-    let keranjang: any[] = savedCart
-      ? JSON.parse(savedCart)
-      : [];
-
-
-    // Mengecek apakah produk sudah ada
-    // di dalam keranjang
-    const index =
-      keranjang.findIndex(
-        item => item.id === product.id
-      );
-
-
-    if (index !== -1) {
-
-      // Jika produk sudah ada,
-      // tambahkan jumlahnya
-      keranjang[index].jumlah +=
-        product.jumlah;
-
-
-      // Jangan sampai jumlah melebihi stok
-      if (
-        keranjang[index].jumlah >
-        product.stok
-      ) {
-
-        keranjang[index].jumlah =
-          product.stok;
-
-      }
-
-    }
-    else {
-
-      // Jika belum ada,
-      // masukkan produk baru
-      keranjang.push({
-
-        id: product.id,
-
-        nama: product.nama,
-
-        harga: product.harga,
-
-        hargaJual: product.hargaJual,
-
-        stok: product.stok,
-
-        gambar: product.gambar,
-
-        jumlah: product.jumlah
-
-      });
-
-    }
-
-
-    // Simpan kembali keranjang
+    // Simpan stok terbaru agar halaman Detail ikut berubah
     localStorage.setItem(
-      'keranjang',
-      JSON.stringify(keranjang)
+      'products',
+      JSON.stringify(this.products)
     );
-
 
     // Reset jumlah pada produk
     product.jumlah = 0;
-
 
     alert(
       'Produk berhasil ditambahkan ke keranjang!'

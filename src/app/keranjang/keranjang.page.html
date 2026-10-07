@@ -23,8 +23,9 @@
     </ion-item>
   </ion-list>
 
-  <!-- Tombol Checkout -->
+  <!-- Total & tombol Checkout -->
   <div class="ion-padding" *ngIf="items.length > 0">
+    <h3 class="ion-text-end">Total: Rp {{ totalHarga }}</h3>
     <ion-button expand="block" color="success" (click)="prosesCheckout()">
       Checkout Pesanan
     </ion-button>
