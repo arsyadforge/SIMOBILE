@@ -1,13 +1,29 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>transaksi</ion-title>
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Riwayat Transaksi</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">transaksi</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-card *ngFor="let trx of riwayat">
+    <ion-card-header>
+      <ion-card-subtitle style="color: yellow;">
+        {{ trx.tanggal | date:'dd MMM yyyy, HH:mm' }}
+      </ion-card-subtitle>
+      
+      <ion-card-title style="color: yellow;">
+        Total: Rp {{ trx.total }}
+      </ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <p><strong style="color: yellow;">Barang yang dibeli:</strong></p>
+      <ul>
+        <!-- Warna kuning juga diterapkan pada daftar barang -->
+        <li *ngFor="let brg of trx.items" style="color: yellow;">
+          {{ brg.nama }} ({{ brg.jumlah }}x) - Rp {{ brg.harga }}
+        </li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
