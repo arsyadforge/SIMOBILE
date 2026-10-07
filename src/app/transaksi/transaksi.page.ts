@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { Transaksi } from '../services/transaksi'; 
 
 @Component({
@@ -11,7 +11,7 @@ export class TransaksiPage implements OnInit {
   riwayat: any[] = [];
 
   // Inject service Transaksi 
-  constructor(private transaksiService: Transaksi) { }
+  constructor(private transaksiService: Transaksi, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.muatData();
@@ -19,6 +19,7 @@ export class TransaksiPage implements OnInit {
 
   ionViewWillEnter() {
     this.muatData();
+    this.cdr.detectChanges();
   }
 
   muatData() {

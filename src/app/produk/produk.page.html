@@ -12,6 +12,9 @@
 
     </ion-buttons>
 
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterProducts()" placeholder="Cari produk...">
+    </ion-searchbar>
+
   </ion-toolbar>
 
 </ion-header>

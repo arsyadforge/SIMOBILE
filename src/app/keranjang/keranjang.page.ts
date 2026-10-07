@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Keranjang } from '../services/keranjang';
 import { ProdukData } from '../services/produk-data';
 import { Transaksi } from '../services/transaksi';
@@ -15,10 +15,16 @@ export class KeranjangPage implements OnInit {
   constructor(
     public keranjangService: Keranjang,
     private produkService: ProdukData,
-    private transaksiService: Transaksi
+    private transaksiService: Transaksi,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
+  }
+
+  // Setiap halaman Keranjang dibuka, gambar ulang tampilannya
+  ionViewWillEnter() {
+    this.cdr.detectChanges();
   }
 
   prosesCheckout() {

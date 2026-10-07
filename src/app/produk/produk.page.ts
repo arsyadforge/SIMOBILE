@@ -13,6 +13,8 @@ export class ProdukPage implements OnInit {
   products: any[] = [];
   productRows: any[][] = [];
 
+  searchTerm: string = '';
+
   constructor(
     private produkService: ProdukData,
     private keranjangService: Keranjang,
@@ -72,6 +74,17 @@ export class ProdukPage implements OnInit {
     // stok berkurang langsung di data service, jadi Detail dan Dashboard ikut berubah
     product.stok -= product.jumlah;
     product.jumlah = 0;
+  }
+
+  filterProducts() {
+    const keyword = this.searchTerm.toLowerCase().trim();
+
+    const filtered = this.products.filter(product =>
+      product.nama.toLowerCase().includes(keyword)
+    );
+
+    // Memecah hasil filter ke dalam baris grid
+    this.productRows = this.chunkArray(filtered, 3);
   }
 
   animasiMasukKeranjang(p_id: number) {

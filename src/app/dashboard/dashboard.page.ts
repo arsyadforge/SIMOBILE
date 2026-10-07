@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProdukData } from '../services/produk-data';
 import { Transaksi } from '../services/transaksi';
 
@@ -17,6 +17,7 @@ export class DashboardPage implements OnInit {
   constructor(
     private produkService: ProdukData,
     private transaksiService: Transaksi,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -25,6 +26,7 @@ export class DashboardPage implements OnInit {
 
   ionViewWillEnter() {
     this.loadData();
+    this.cdr.detectChanges();
   }
 
   loadData() {
