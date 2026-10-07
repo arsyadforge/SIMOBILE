@@ -20,6 +20,9 @@ export class ProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
     if (!this.authService.isLoggedIn) {
       this.navCtrl.navigateRoot('/login');
     } else {

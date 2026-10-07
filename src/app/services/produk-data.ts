@@ -41,4 +41,34 @@ export class ProdukData {
     }
     return terlaris;
   }
+
+  tambahProduk(p_nama: string, p_stok: number, p_hargaBeli: number, p_harga: number, p_gambar: string) {
+    let idBaru = 1;
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].id >= idBaru) {
+        idBaru = this.products[i].id + 1;
+      }
+    }
+    this.products.push({
+      id: idBaru, nama: p_nama, kategori: 'Lainnya', stok: p_stok,
+      hargaBeli: p_hargaBeli, harga: p_harga, gambar: p_gambar, terjual: 0
+    });
+  }
+
+  ubahProduk(p_id: number, p_nama: string, p_stok: number, p_hargaBeli: number, p_harga: number) {
+    const produk = this.getProdukById(p_id);
+    if (produk != null) {
+      produk.nama = p_nama;
+      produk.stok = p_stok;
+      produk.hargaBeli = p_hargaBeli;
+      produk.harga = p_harga;
+    }
+  }
+
+  tambahTerjual(p_id: number, p_jumlah: number) {
+    const produk = this.getProdukById(p_id);
+    if (produk != null) {
+      produk.terjual += p_jumlah;
+    }
+  }
 }
