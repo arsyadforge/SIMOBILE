@@ -13,28 +13,28 @@
       <ion-list>
 
         <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="/tabs/dashboard">
+          <ion-item routerLink="/dashboard">
             <ion-icon name="home-outline" slot="start"></ion-icon>
             <ion-label>Dashboard</ion-label>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="/tabs/produk">
+          <ion-item routerLink="/produk">
             <ion-icon name="list-outline" slot="start"></ion-icon>
             <ion-label>Produk</ion-label>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="/tabs/keranjang">
+          <ion-item routerLink="/keranjang">
             <ion-icon name="cart-outline" slot="start"></ion-icon>
             <ion-label>Keranjang</ion-label>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="/tabs/transaksi">
+          <ion-item routerLink="/transaksi">
             <ion-icon name="receipt-outline" slot="start"></ion-icon>
             <ion-label>Transaksi</ion-label>
           </ion-item>
@@ -64,5 +64,31 @@
 
 
   <ion-router-outlet id="main-content"></ion-router-outlet>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+
+      <ion-tab-button tab="dashboard">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Dashboard</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="produk">
+        <ion-icon name="list-outline"></ion-icon>
+        <ion-label>Produk</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="keranjang">
+        <ion-icon name="cart-outline"></ion-icon>
+        <ion-label>Keranjang</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="transaksi">
+        <ion-icon name="receipt-outline"></ion-icon>
+        <ion-label>Transaksi</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
 
 </ion-app>

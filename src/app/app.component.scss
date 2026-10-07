@@ -1,6 +1,6 @@
 ion-content.no-scroll {
-  --overflow: hidden;
-  overflow: hidden;
+    --overflow: hidden;
+    overflow: hidden;
 }
 
 .spinner-area {
@@ -41,4 +41,21 @@ ion-content.no-scroll {
     border-top-color: var(--ion-color-secondary);
     border-right-color: var(--ion-color-secondary);
     border-bottom-color: var(--ion-color-secondary);
+}
+
+ion-tab-bar {
+    --background: var(--ion-item-background);
+    --color: #999999;
+    --color-selected: var(--ion-color-primary);
+}
+
+ion-tab-button {
+    --color: #999999;
+    --color-selected: var(--ion-color-primary);
+}
+
+/* Mode gelap: primary-nya navy, hampir tak terlihat di latar gelap, jadi pakai secondary */
+body.dark ion-tab-bar,
+body.dark ion-tab-button {
+    --color-selected: var(--ion-color-secondary);
 }
