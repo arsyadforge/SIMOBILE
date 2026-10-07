@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdukData } from '../services/produk-data';
 import { Keranjang } from '../services/keranjang';
+import { AnimationController } from '@ionic/angular/lazy';
 
 @Component({
   selector: 'app-produk',
@@ -12,7 +13,11 @@ export class ProdukPage implements OnInit {
   products: any[] = [];
   productRows: any[][] = [];
 
-  constructor(private produkService: ProdukData, private keranjangService: Keranjang) { }
+  constructor(
+    private produkService: ProdukData,
+    private keranjangService: Keranjang,
+    private animationCtrl: AnimationController
+  ) { }
 
   ngOnInit() {
     this.muatProduk();
@@ -62,10 +67,27 @@ export class ProdukPage implements OnInit {
     // harga yang dikirim = harga jual
     this.keranjangService.tambahItem(product.id, product.nama, product.jumlah, product.harga);
 
+    this.animasiMasukKeranjang(product.id);
+
     // stok berkurang langsung di data service, jadi Detail dan Dashboard ikut berubah
     product.stok -= product.jumlah;
     product.jumlah = 0;
+  }
 
-    alert('Produk berhasil ditambahkan ke keranjang!');
+  animasiMasukKeranjang(p_id: number) {
+    const kartu = document.querySelector('#produk-' + p_id) as HTMLElement;
+
+    const animation = this.animationCtrl
+      .create()
+      .addElement(kartu)
+      .duration(500)
+      .easing('ease-in-out')
+      .keyframes([
+        { offset: 0, transform: 'scale(1)', opacity: '1' },
+        { offset: 0.5, transform: 'scale(1.1)', opacity: '0.7' },
+        { offset: 1, transform: 'scale(1)', opacity: '1' },
+      ]);
+
+    animation.play();
   }
 }

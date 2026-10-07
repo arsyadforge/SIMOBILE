@@ -22,36 +22,25 @@
   <ion-grid>
 
     <!-- Mengulang setiap baris produk -->
-    <ion-row
-      *ngFor="let row of productRows"
-    >
+    <ion-row *ngFor="let row of productRows">
 
       <!-- Mengulang setiap produk -->
-      <ion-col
-        size="4"
-        *ngFor="let product of row"
-      >
+      <ion-col size="4" *ngFor="let product of row">
 
-        <ion-card>
+        <ion-card id="produk-{{ product.id }}">
 
           <!-- Bagian produk -->
-          <div
-            [routerLink]="['detail', product.id]"
-          >
+          <div [routerLink]="['detail', product.id]">
 
             <!-- Gambar produk -->
-            <ion-img
-              [src]="product.gambar"
-            >
+            <ion-img [src]="product.gambar">
             </ion-img>
 
 
             <!-- Nama produk -->
             <ion-card-header>
 
-              <ion-card-title
-                color="secondary"
-              >
+              <ion-card-title color="secondary">
                 {{ product.nama }}
 
               </ion-card-title>
@@ -62,10 +51,7 @@
 
 
           <!-- Tombol EDIT -->
-          <ion-button
-            expand="block"
-            [routerLink]="['form', product.id]"
-          >
+          <ion-button expand="block" [routerLink]="['form', product.id]">
 
             EDIT
 
@@ -76,12 +62,7 @@
           <div class="jumlah-container">
 
             <!-- Tombol kurang -->
-            <ion-button
-              size="small"
-              fill="outline"
-              (click)="kurangJumlah(product)"
-              [disabled]="product.jumlah <= 0"
-            >
+            <ion-button size="small" fill="outline" (click)="kurangJumlah(product)" [disabled]="product.jumlah <= 0">
 
               −
 
@@ -97,12 +78,8 @@
 
 
             <!-- Tombol tambah -->
-            <ion-button
-              size="small"
-              fill="outline"
-              (click)="tambahJumlah(product)"
-              [disabled]="product.jumlah >= product.stok"
-            >
+            <ion-button size="small" fill="outline" (click)="tambahJumlah(product)"
+              [disabled]="product.jumlah >= product.stok">
 
               +
 
@@ -112,12 +89,8 @@
 
 
           <!-- Tombol simpan ke keranjang -->
-          <ion-button
-            expand="block"
-            color="success"
-            (click)="simpanKeKeranjang(product)"
-            [disabled]="product.stok <= 0"
-          >
+          <ion-button expand="block" color="success" (click)="simpanKeKeranjang(product)"
+            [disabled]="product.stok <= 0">
 
             SIMPAN KE KERANJANG
 
@@ -134,9 +107,7 @@
 
 
   <!-- Jika tidak ada produk -->
-  <ion-item
-    *ngIf="productRows.length == 0"
-  >
+  <ion-item *ngIf="productRows.length == 0">
 
     <ion-label>
       Produk tidak ditemukan
