@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProdukData } from '../../services/produk-data';
 
 import {
   ActivatedRoute
@@ -31,59 +32,25 @@ export class DetailPage implements OnInit {
 
 
   constructor(
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute, private produkService: ProdukData
+  ) { }
 
 
   ngOnInit() {
 
     // Mengambil ID dari URL
     this.route.params.subscribe(params => {
-
       this.id = params['id'];
 
+      const product = this.produkService.getProdukById(Number(this.id));
 
-      // Mengambil data produk dari localStorage
-      const savedProducts =
-        localStorage.getItem('products');
-
-
-      // Jika data tersedia
-      if (savedProducts) {
-
-        const products =
-          JSON.parse(savedProducts);
-
-
-        // Mencari produk berdasarkan ID
-        const product = products.find(
-          (p: any) =>
-            p.id === Number(this.id)
-        );
-
-
-        // Jika produk ditemukan
-        if (product) {
-
-          // Menampilkan nama produk
-          this.nama = product.nama;
-
-          // Menampilkan stok
-          this.stok = product.stok;
-
-          // Menampilkan harga beli
-          this.hargaBeli = product.harga;
-
-          // Menampilkan harga jual
-          this.hargaJual = product.hargaJual;
-
-          // Menampilkan gambar
-          this.gambar = product.gambar;
-
-        }
-
+      if (product != null) {
+        this.nama = product.nama;
+        this.stok = product.stok;
+        this.hargaBeli = product.hargaBeli;
+        this.hargaJual = product.harga;
+        this.gambar = product.gambar;
       }
-
     });
 
   }
