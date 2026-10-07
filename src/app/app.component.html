@@ -44,6 +44,13 @@
           <ion-icon name="moon-outline" slot="start"></ion-icon>
           <ion-toggle [checked]="isDark" (click)="gantiTema()">Mode Gelap</ion-toggle>
         </ion-item>
+
+        <ion-menu-toggle auto-hide="true">
+          <ion-item routerLink="profile">
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
 
       <div class="spinner-area">
