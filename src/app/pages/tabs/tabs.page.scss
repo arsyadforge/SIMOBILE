@@ -1,10 +1,16 @@
 ion-tab-bar {
-  --background: #222222;
+  --background: var(--ion-item-background);
   --color: #999999;
-  --color-selected: #006eff;
+  --color-selected: var(--ion-color-primary);
 }
 
 ion-tab-button {
   --color: #999999;
-  --color-selected: #006eff;
+  --color-selected: var(--ion-color-primary);
+}
+
+/* Mode gelap: primary-nya navy, hampir tak terlihat di latar gelap, jadi pakai secondary */
+body.dark ion-tab-bar,
+body.dark ion-tab-button {
+  --color-selected: var(--ion-color-secondary);
 }

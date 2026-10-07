@@ -1,0 +1,44 @@
+ion-content.no-scroll {
+  --overflow: hidden;
+  overflow: hidden;
+}
+
+.spinner-area {
+    position: absolute;
+    bottom: -220px;
+    left: -220px;
+    width: 480px;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none;
+    /* Prevents spinner from blocking menu clicks */
+}
+
+#donut-spinner1 {
+    position: absolute;
+    width: 330px;
+    height: 330px;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    border: 40px solid transparent;
+    border-top-color: var(--ion-color-primary);
+    border-right-color: var(--ion-color-primary);
+    border-bottom-color: var(--ion-color-primary);
+}
+
+#donut-spinner2 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    border: 40px solid transparent;
+    border-top-color: var(--ion-color-secondary);
+    border-right-color: var(--ion-color-secondary);
+    border-bottom-color: var(--ion-color-secondary);
+}

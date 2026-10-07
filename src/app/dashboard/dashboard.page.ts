@@ -16,8 +16,8 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private produkService: ProdukData,
-    private transaksiService: Transaksi
-  ) {}
+    private transaksiService: Transaksi,
+  ) { }
 
   ngOnInit() {
     this.loadData();
@@ -31,7 +31,7 @@ export class DashboardPage implements OnInit {
     this.jumlahProduk = this.produkService.getJumlahProduk();
     this.jumlahTransaksiHariIni = this.transaksiService.getJumlahTransaksiHariIni();
     this.totalPenjualanHariIni = this.transaksiService.getTotalPenjualanHariIni();
-    
+
     const terlarisObj = this.produkService.getProdukTerlaris();
     this.produkTerlaris = terlarisObj ? `${terlarisObj.nama} (${terlarisObj.terjual} terjual)` : '-';
   }
